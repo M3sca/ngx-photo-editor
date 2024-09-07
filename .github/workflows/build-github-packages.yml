@@ -1,0 +1,30 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - "*.*.*"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest    
+    # runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install dependencies
+        run: npm install
+      - name: Build project
+        run: npm run build:lib
+      - name: Compress dist folder
+        run: |          
+          cd ./dist/ngx-photo-editor
+          tar -czf dist.tar.gz ./*
+      - name: Upload compressed dist folder
+        uses: actions/upload-artifact@v2
+        with:
+          name: dist
+          path: ./dist/ngx-photo-editor/dist.tar.gz      
+      - name: Release        
+        uses: softprops/action-gh-release@v1
+        with:          
+          files: ./dist/ngx-photo-editor/dist.tar.gz
