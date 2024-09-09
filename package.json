@@ -30,7 +30,7 @@
     "cropperjs": "^1.5.12",
     "ngx-photo-editor": "file:dist/ngx-photo-editor",
     "rxjs": "~7.5.0",
-    "tslib": "^2.3.0",
+    "tslib": "^2.6.3",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
